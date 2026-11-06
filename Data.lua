@@ -2,6 +2,9 @@
 -- Text entries are either a plain string or { "English", "Svenska" }.
 local _, ns = ...
 
+-- Main professions until you pick or learn others.
+ns.DEFAULT_PROFS = { "Alchemy", "Herbalism" }
+
 -- Talent point per level: Feral (cat) leveling, 0/41/10 at 60.
 -- Checked against the live tree (build 1.60.1.70790): every talent is taken only once
 -- its row has 5 points per row spent in that tree, and Blood Frenzy (Sharpened Claws 2/2),

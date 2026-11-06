@@ -13,7 +13,7 @@
 Locale.lua
 Data.lua
 TrainData.lua
-CraftData.lua
+ProfData.lua
 DruidPlan.lua
 Plans.lua
 Ranks.lua

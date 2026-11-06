@@ -15,6 +15,28 @@ local TIPS = {
     text = { "Nina Surefire sells Alchemy recipes for Merchant's Favor here, including Major Frenzy Potion (290-300).", "Nina Surefire säljer Alchemy-recept för Merchant's Favor här, bland annat Major Frenzy Potion (290-300)." } },
   { zone = "Moonglade",
     text = { "Moonglade: druid trainers for every faction, and Teleport: Moonglade brings you back any time.", "Moonglade: druid-trainers för alla fraktioner, och Teleport: Moonglade tar dig hit när som helst." } },
+  { zone = "Shadowfang Keep", prof = "Tailoring",
+    text = { "The Filigreed Silky Gown and Leggings patterns drop here.", "Mönstren för Filigreed Silky Gown och Leggings droppar här." } },
+  { zone = "Deadmines", prof = "Tailoring",
+    text = { "The Filigreed Silky Gown pattern drops here.", "Mönstret för Filigreed Silky Gown droppar här." } },
+  { zone = "Three Corners",
+    text = { "Merchant's Favor vendors are here: Mivin Shadowweave (Tailoring patterns) and Alynsia (Enchanting).", "Här finns Merchant's Favor-försäljarna: Mivin Shadowweave (Tailoring-mönster) och Alynsia (Enchanting)." } },
+  { zone = "Tower of Azora", prof = "Enchanting",
+    text = { "Kitta Firewind trains Expert Enchanting here (level 20).", "Kitta Firewind tränar Expert Enchanting här (level 20)." } },
+  { zone = "Theramore", prof = "Tailoring",
+    text = { "Timothy Worthington trains Artisan Tailoring here (level 35).", "Timothy Worthington tränar Artisan Tailoring här (level 35)." } },
+  { zone = "Uldaman", prof = "Enchanting",
+    text = { "Annora, the Artisan Enchanting trainer, is in here. Clear the way to her room.", "Annora, Artisan-trainern i Enchanting, finns här inne. Rensa vägen till hennes rum." } },
+  { zone = "Silithus", prof = "Enchanting",
+    text = { "Kania sells the Lesser Mana Oil formula here (Enchanting 250-265).", "Kania säljer formeln för Lesser Mana Oil här (Enchanting 250-265)." } },
+  { zone = "Moonglade", prof = "Enchanting",
+    text = { "Lorelae Wintersong sells the Runed Arcanite Rod formula here.", "Lorelae Wintersong säljer formeln för Runed Arcanite Rod här." } },
+  { zone = "Mount Hyjal", prof = "Tailoring",
+    text = { "Aisarra Nightmeadow sells the Malleable Essence of Nature pattern here (for Manaflare).", "Aisarra Nightmeadow säljer mönstret för Malleable Essence of Nature här (för Manaflare)." } },
+  { zone = "Ironforge", prof = "Alchemy",
+    text = { "Alchemy here: Vosur Brakthel (Apprentice, Tinker Town) and Tally Berryfizz (Journeyman, level 10).", "Alchemy här: Vosur Brakthel (Apprentice, Tinker Town) och Tally Berryfizz (Journeyman, level 10)." } },
+  { zone = "Darnassus", prof = "Alchemy",
+    text = { "Ainethil trains Expert Alchemy here (level 20). Ulthir sells the Superior Mana Potion recipe.", "Ainethil tränar Expert Alchemy här (level 20). Ulthir säljer receptet på Superior Mana Potion." } },
 }
 
 local shown = {}
@@ -39,7 +61,7 @@ local function Check()
       local relevant = true
       if tip.prof then
         local skill = ns.GetProfSkill(tip.prof)
-        relevant = skill ~= nil and skill < 300
+        relevant = ns.HasProf(tip.prof) and (skill == nil or skill < 300)
       end
       if relevant then
         shown[i] = true
