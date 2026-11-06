@@ -1,4 +1,9 @@
-# DruidPlan 1.0.0-beta3
+# DruidPlan 1.0.0-beta4
+
+**New**
+- A little secret for players who both use one of my Plan addons (MagePlan, ShamanPlan, DruidPlan). Try `/kiss` on a friend. <3
+
+## DruidPlan 1.0.0-beta3
 
 **New**
 - **Train now:** the plan window lists exactly which spell ranks your class trainer has for you (e.g. "Wrath 2"), and you get a ping with a sound when something new becomes trainable. `/dp train` shows the list again.
