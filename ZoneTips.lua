@@ -1,0 +1,66 @@
+-- DruidPlan: zone tips. A short note when you enter a place that matters for the plan:
+-- Alchemy trainers, recipe vendors and druid spots.
+local _, ns = ...
+
+local TIPS = {
+  { zone = "Valanaar", prof = "Alchemy",
+    text = { "Apprentice Alchemy here: Iaadaria Bitterwind or Valiena Swiftgale.", "Apprentice Alchemy här: Iaadaria Bitterwind eller Valiena Swiftgale." } },
+  { zone = "Darnassus", prof = "Alchemy",
+    text = { "Alchemy here: Sylvanna Forestmoon (Journeyman, level 10) and Ainethil (Expert, level 20). Ulthir sells the Superior Mana Potion recipe.", "Alchemy här: Sylvanna Forestmoon (Journeyman, level 10) och Ainethil (Expert, level 20). Ulthir säljer receptet på Superior Mana Potion." } },
+  { zone = "Feathermoon", prof = "Alchemy",
+    text = { "Kylanna Windwhisper trains Artisan Alchemy here (level 35), and Logannas sells the Nature Protection Potion recipe.", "Kylanna Windwhisper tränar Artisan Alchemy här (level 35), och Logannas säljer receptet på Nature Protection Potion." } },
+  { zone = "Stormwind", prof = "Alchemy",
+    text = { "Algernon sells the Superior Mana Potion recipe (Alchemy 265).", "Algernon säljer receptet på Superior Mana Potion (Alchemy 265)." } },
+  { zone = "Three Corners", prof = "Alchemy",
+    text = { "Nina Surefire sells Alchemy recipes for Merchant's Favor here, including Major Frenzy Potion (290-300).", "Nina Surefire säljer Alchemy-recept för Merchant's Favor här, bland annat Major Frenzy Potion (290-300)." } },
+  { zone = "Moonglade",
+    text = { "Moonglade: druid trainers for every faction, and Teleport: Moonglade brings you back any time.", "Moonglade: druid-trainers för alla fraktioner, och Teleport: Moonglade tar dig hit när som helst." } },
+}
+
+local shown = {}
+
+local function Places()
+  local list = {}
+  if GetZoneText then table.insert(list, GetZoneText() or "") end
+  if GetSubZoneText then table.insert(list, GetSubZoneText() or "") end
+  if GetRealZoneText then table.insert(list, GetRealZoneText() or "") end
+  if GetInstanceInfo then
+    local ok, name = pcall(GetInstanceInfo)
+    if ok and name then table.insert(list, name) end
+  end
+  return table.concat(list, " | ")
+end
+
+local function Check()
+  if ns.db.zoneTipsOff then return end
+  local here = Places()
+  for i, tip in ipairs(TIPS) do
+    if not shown[i] and here:find(tip.zone, 1, true) then
+      local relevant = true
+      if tip.prof then
+        local skill = ns.GetProfSkill(tip.prof)
+        relevant = skill ~= nil and skill < 300
+      end
+      if relevant then
+        shown[i] = true
+        local text = ns.Tx(tip.text)
+        if UIErrorsFrame and UIErrorsFrame.AddMessage then UIErrorsFrame:AddMessage(text, 0.4, 0.8, 1) end
+        ns.Print("|cff66ccff" .. text .. "|r")
+      end
+    end
+  end
+end
+
+ns.RegisterModule(function()
+  local ev = CreateFrame("Frame")
+  ev:RegisterEvent("PLAYER_ENTERING_WORLD")
+  ev:RegisterEvent("ZONE_CHANGED")
+  ev:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+  ev:RegisterEvent("ZONE_CHANGED_INDOORS")
+  ev:SetScript("OnEvent", function() ns.Debounce("zonetips", 1, Check) end)
+end)
+
+ns.RegisterCommand("zonetips", true, function()
+  ns.db.zoneTipsOff = not ns.db.zoneTipsOff
+  ns.Print(ns.db.zoneTipsOff and ns.T("ZONE_OFF") or ns.T("ZONE_ON"))
+end)
