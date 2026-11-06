@@ -1,4 +1,10 @@
-# DruidPlan 1.0.0-beta2
+# DruidPlan 1.0.0-beta3
+
+**New**
+- **Train now:** the plan window lists exactly which spell ranks your class trainer has for you (e.g. "Wrath 2"), and you get a ping with a sound when something new becomes trainable. `/dp train` shows the list again.
+- Replaces the old "visit your trainer at every even level" reminder, which didn't say what to train and stayed quiet right after install.
+
+## DruidPlan 1.0.0-beta2
 
 First version: a leveling companion for **Feral druids in WoW Forever**, built on MagePlan and ShamanPlan.
 

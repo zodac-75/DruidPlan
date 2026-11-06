@@ -12,6 +12,7 @@
 
 Locale.lua
 Data.lua
+TrainData.lua
 CraftData.lua
 DruidPlan.lua
 Plans.lua
