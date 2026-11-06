@@ -1,4 +1,4 @@
-# DruidPlan 1.0.0-beta1
+# DruidPlan 1.0.0-beta2
 
 First version: a leveling companion for **Feral druids in WoW Forever**, built on MagePlan and ShamanPlan.
 

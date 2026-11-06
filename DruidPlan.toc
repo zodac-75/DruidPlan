@@ -7,6 +7,7 @@
 ## SavedVariables: DruidPlanGlobal
 ## SavedVariablesPerCharacter: DruidPlanDB
 
+## X-Curse-Project-ID: 1787775
 ## X-License: GPL-3.0
 
 Locale.lua
